@@ -7,3 +7,6 @@ SJC spēle pitona kodiņā
 Te es varu pierakstīt klāt visu ko!!!
 
 
+Treneris ir nins! (10 rindā :)( :) 
+
+
