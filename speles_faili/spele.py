@@ -1,1 +1,4 @@
 #speles kods!!! 
+
+
+#jauna rinda

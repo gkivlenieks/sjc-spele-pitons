@@ -10,7 +10,7 @@ w = Canvas(master,
 master.title("Līnijas spēle")
 
 
-
+# KOMENTĀRI!!! 
 w.pack()
 c
 x1=300
