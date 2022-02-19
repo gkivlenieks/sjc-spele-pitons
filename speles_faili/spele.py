@@ -102,9 +102,17 @@ def punkti():
     px = w.coords(player)
     pxx = px[0]
     pxy = px[1]
-    if pxx == 250 and pxy == 250:
+    ob = random.randrange(50,600)
+    oy = random.randrange(50,600)
+    print(ob, oy)
+    w.create_image(ob,oy, image = bilde)
+    if pxx == ob and oy == 250:
         print("uzvara")
-        w.create_image(50,400, image = bilde)
+        w.create_image(ob,oy, image = bilde)
+    if pxx == 300 and pxy == 300:
+        w.create_image(200,300, image = bilde)
+  # ja spēlētāja koordinātes (pxx un pxy) ir kaut kas - tad varam kaut ko izdarīt...
+    
 
 
 
