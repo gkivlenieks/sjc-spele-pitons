@@ -38,7 +38,7 @@ direction = None
 #w.create_line(300, 200, 300, 190, width=10, fill='black')
 #w.create_line(300, 120, 300, 130, width=10, fill='brown')
 #w.create_line(300, 400, 300, 410, width=10, fill='orange')
-#bilde = PhotoImage(file="sjc-spele-pitons\SPELES_arhivs\semene.ppm")
+bilde = PhotoImage(file="sjc-spele-pitons\SPELES_arhivs\semene.ppm")
 pika = PhotoImage(file="sjc-spele-pitons\SPELES_arhivs\pika.ppm")
 #w.create_image(50,400, image = bilde)
 player = w.create_image(0,0, image = pika)
@@ -104,6 +104,7 @@ def punkti():
     pxy = px[1]
     if pxx == 250 and pxy == 250:
         print("uzvara")
+        w.create_image(50,400, image = bilde)
 
 
 
