@@ -19,11 +19,13 @@ e=5
 f='blue'
 teksts=30
 g=100
+#mainīgie par kustību!!!!
 x = 10
 y = 10
 a = 100
 b = 100
 direction = None
+
 def clicked(event):
     print("pressed")
     e=30
@@ -62,13 +64,14 @@ biezums()
 
 player =w.create_image(x2,y2, image = pika)
 
+# KUSTĪBU KOORDINĀCIJ!!!!
 def move():
     global x_vel
     global y_vel
     global direction
     if direction is not None:
         w.move(player, x_vel,y_vel)
-        after(33,move)
+        #after(33,move)
 
 def on_keypress(event):
     global direction
@@ -92,6 +95,8 @@ def on_keypress(event):
         y_vel = -5
     
     move()
+    koordinates = w.coords(player)
+    print(koordinates)
 
 def on_keyrelease(event):
     global direction
