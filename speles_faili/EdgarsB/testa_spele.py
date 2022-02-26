@@ -28,6 +28,18 @@ logs.delete(player)
 fons = PhotoImage(file="speles_faili\EdgarsB\mezs_sss.png")
 logs.create_image(0,0, image=fons)
 
+# SĒNES (15 elementi mapē)
+sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm")
+sene1 = logs.create_image(600,600, image=sene)
+
+def punkti():
+    px = logs.coords(player)
+    pxx = int(px[0])
+    pxy = int(px[1])
+    if pxx==600 & pxy==600:
+        logs.delete(sene1)
+        print("seeeneee")
+
 #KUSTĪBA _ staigājam apkārt...
 player = logs.create_image(250,250, image = sarkG)
 def move():
@@ -36,7 +48,7 @@ def move():
     global direction
     if direction is not None:
         logs.move(player, x_vel,y_vel)
-        #punkti()
+        punkti()
         #after(33,move)
 
 def on_keypress(event):
@@ -67,6 +79,9 @@ def on_keypress(event):
 def on_keyrelease(event):
     global direction
     direction = None
+
+
+
 
 
 
