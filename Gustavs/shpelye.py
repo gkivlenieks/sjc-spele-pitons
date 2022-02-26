@@ -1,6 +1,7 @@
 from email.mime import image
 from tkinter import *
 from PIL import Image, ImageTk, ImageOps
+import random
 
 master = Tk()
 
@@ -15,26 +16,25 @@ logs = Canvas (
     height=CH
 )
 logs.pack()
-# sēne
-mushM = 10
-mushroom = Image.open('gustavs/assets/Mushroom.png')
-MushSiz = mushroom.size
-mushroom = mushroom.resize((MushSiz[0] // mushM, MushSiz[1] // mushM))
-seene = ImageTk.PhotoImage(mushroom)
-
-# pac cik pikseļiem playeris pārvietojas
+# pa cik pikseļiem playeris pārvietojas
 pstep = 5
 # backgrounds
 grass = PhotoImage(file='Gustavs/assets/graaas.ppm')
 #fons
 bukgronds = logs.create_image(CW // 2, CH // 2, image= grass)
-#mario bildīte, bildes izmēri, pa cik bilde tiks uztaisīta mazāka
+# sēne bildes izmēri, pa cik bilde tiks uztaisīta mazāka, tās uzlikšana
+mushM = 5
+mushroom = Image.open('gustavs/assets/Mushroom.png')
+MushSiz = mushroom.size
+mushroom = mushroom.resize((MushSiz[0] // mushM, MushSiz[1] // mushM))
+seene = ImageTk.PhotoImage(mushroom)
+sene = logs.create_image(random.randrange(20, CW - 20, 5), random.randrange(20, CH - 20, 5), image= seene)
+#mario bildīte, bildes izmēri, pa cik bilde tiks uztaisīta mazāka, tās uzlikšana
 ImgM = 10
 marijo = Image.open('Gustavs/assets/BMario-NoBG.png')
 MarioSiz = marijo.size
 marijo = marijo.resize((MarioSiz[0] // ImgM, MarioSiz[1] // ImgM))
 ma = ImageTk.PhotoImage(marijo)
-#mario bildītes izveidošana
 playah = logs.create_image(CW // 2, CH // 2, image = ma)
 #loga title
 master.title("Linijas spēle")
