@@ -8,6 +8,9 @@ CW = 600
 CH = 600
 pstep = 5
 grass = PhotoImage(file='Gustavs/assets/graaas.ppm')
+ImgW = 426
+ImgH = 586
+ImgM = 10
 
 logs = Canvas (
     master,
@@ -16,7 +19,8 @@ logs = Canvas (
 )
 bukgronds = logs.create_image(CW // 2, CH // 2, image= grass)
 logs.pack()
-marijo = Image.open('Gustavs/assets/marijo.ppm')
+marijo = Image.open('Gustavs/assets/BMario-NoBG.png')
+marijo = marijo.resize((ImgW // ImgM, ImgH // ImgM))
 ma = ImageTk.PhotoImage(marijo)
 playah = logs.create_image(CW // 2, CH // 2, image = ma)
 master.title("Linijas spēle")
