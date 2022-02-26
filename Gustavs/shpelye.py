@@ -7,14 +7,7 @@ master = Tk()
 # canvas augstums, platums
 CW = 600
 CH = 600
-# cik pikseļu playeris pārvietojas
-pstep = 5
-# backgrounds
-grass = PhotoImage(file='Gustavs/assets/graaas.ppm')
-# spēlētāja bildes izmēri, pa cik bilde tiks uztaisīta mazāka
-ImgW = 426
-ImgH = 586
-ImgM = 10
+
 #main logs
 logs = Canvas (
     master,
@@ -22,11 +15,24 @@ logs = Canvas (
     height=CH
 )
 logs.pack()
+# sēne
+mushM = 10
+mushroom = Image.open('gustavs/assets/Mushroom.png')
+MushSiz = mushroom.size
+mushroom = mushroom.resize((MushSiz[0] // mushM, MushSiz[1] // mushM))
+seene = ImageTk.PhotoImage(mushroom)
+
+# pac cik pikseļiem playeris pārvietojas
+pstep = 5
+# backgrounds
+grass = PhotoImage(file='Gustavs/assets/graaas.ppm')
 #fons
 bukgronds = logs.create_image(CW // 2, CH // 2, image= grass)
-#mario bildīte
+#mario bildīte, bildes izmēri, pa cik bilde tiks uztaisīta mazāka
+ImgM = 10
 marijo = Image.open('Gustavs/assets/BMario-NoBG.png')
-marijo = marijo.resize((ImgW // ImgM, ImgH // ImgM))
+MarioSiz = marijo.size
+marijo = marijo.resize((MarioSiz[0] // ImgM, MarioSiz[1] // ImgM))
 ma = ImageTk.PhotoImage(marijo)
 #mario bildītes izveidošana
 playah = logs.create_image(CW // 2, CH // 2, image = ma)
