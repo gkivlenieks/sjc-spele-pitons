@@ -9,7 +9,6 @@ w = Canvas(master,
            height=canvas_height)
 master.title("Līnijas spēle")
 
-
 # KOMENTĀRI!!! 
 w.pack()
 c
@@ -33,10 +32,10 @@ w.create_line(300, 150, 300, 160, width=10, fill='green')
 w.create_line(300, 200, 300, 190, width=10, fill='black')
 w.create_line(300, 120, 300, 130, width=10, fill='brown')
 w.create_line(300, 400, 300, 410, width=10, fill='orange')
-bilde = PhotoImage(file="SPELES_arhivs\pika.ppm")
-pika = PhotoImage(file="SPELES_arhivs\semene.ppm")
-w.create_image(50,400, image = bilde)
-player = w.create_image(0,0, image = pika)
+bilde = PhotoImage(file="Felikss\istaismezs.ppm")
+speletajs = PhotoImage(file="Felikss\speletajs.ppm")
+w.create_image(900,900, image = bilde)
+player = w.create_image(0,0, image = speletajs)
 w.delete(player)
 def punkti():
     global teksts
@@ -63,7 +62,7 @@ def uzaugsu():
     x2=x1+0
     y2=y1-10
     c = w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player =w.create_image(x2,y2, image = pika)
+    player =w.create_image(x2,y2, image = speletajs)
     x1=x2
     y1=y2
     print(x1)
@@ -76,7 +75,7 @@ def palabi():
     x2=x1+10
     y2=y1+0
     w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player = w.create_image(x2,y2, image = pika)
+    player = w.create_image(x2,y2, image = speletajs)
     x1=x2
     y1=y2
     print(x1)
@@ -88,7 +87,7 @@ def pakreisi():
     y2=y1+0
     w.delete(player)
     w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player = w.create_image(x2,y2, image = pika)
+    player = w.create_image(x2,y2, image = speletajs)
     x1=x2
     y1=y2
     print(x1)
@@ -100,7 +99,7 @@ def uzleju():
     y2=y1+10
     w.delete(player)
     w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player = w.create_image(x2,y2, image = pika)
+    player = w.create_image(x2,y2, image = speletajs)
     x1=x2
     y1=y2
     print(x1)
@@ -159,7 +158,6 @@ while g>0:
         g=g-1
     if g==0:
         break 
-
 
 
 
