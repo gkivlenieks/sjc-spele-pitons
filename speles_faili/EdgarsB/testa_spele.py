@@ -32,6 +32,7 @@ logs.create_image(0,0, image=fons)
 sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm")
 sene1 = logs.create_image(600,600, image=sene)
 
+#punktu skaitīšana....
 def punkti():
     px = logs.coords(player)
     pxx = int(px[0])
