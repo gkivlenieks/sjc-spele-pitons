@@ -9,7 +9,7 @@ master = Tk()
 
 direction = None
 
-
+rezultats = 0
 
 #Izveidojam spelēs laukumu!!! neaizmirstam komandu .pack()
 logs = Canvas(master, 
@@ -28,18 +28,42 @@ logs.delete(player)
 fons = PhotoImage(file="speles_faili\EdgarsB\mezs_sss.png")
 logs.create_image(0,0, image=fons)
 
-# SĒNES (15 elementi mapē)
+# SĒNES (15 elementi mapē) 1
+sx1 = random.randrange(100, 800, 150)
+sy1 = random.randrange(100, 800, 150)
+#print(sx)
+#print(sy)
 sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm")
-sene1 = logs.create_image(600,600, image=sene)
+sene1 = logs.create_image(sx1, sy1, image=sene)
+
+#Sēne 2
+sx2 = random.randrange(100, 800, 150)
+sy2 = random.randrange(100, 800, 150)
+#sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm")
+sene2 = logs.create_image(sx2, sy2, image=sene)
+
+print(sx1, sy1, sx2, sy2)
 
 #punktu skaitīšana....
 def punkti():
+    global sx1, sy1, sx2, sy2, rezultats
+    
     px = logs.coords(player)
     pxx = int(px[0])
     pxy = int(px[1])
-    if pxx==600 & pxy==600:
+    #print(pxx, pxy, sx1, sy1 )
+    # pirmā sēne noķerta... 
+    print(rezultats)
+    if pxx==sx1 and pxy==sy1:
         logs.delete(sene1)
         print("seeeneee")
+        rezultats = rezultats +1
+        
+    if pxx==sx2 and pxy==sy2:
+        logs.delete(sene2)
+        print("seeeneee")
+        rezultats = rezultats +1
+        
 
 #KUSTĪBA _ staigājam apkārt...
 player = logs.create_image(250,250, image = sarkG)
@@ -75,7 +99,7 @@ def on_keypress(event):
     
     move()
     koordinates = logs.coords(player)
-    print(koordinates)
+    #print(koordinates)
 
 def on_keyrelease(event):
     global direction
