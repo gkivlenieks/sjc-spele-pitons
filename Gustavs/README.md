@@ -2,4 +2,4 @@
 ```
 ayo what
 ```
-# te kkas updatojas?
+# šis ir kaut kas pierakstīts klāt 11:10
