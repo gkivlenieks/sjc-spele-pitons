@@ -52,6 +52,7 @@ sene3status = 0
 
 # UZTAISĪT 5- 10 sēnes!!!!
 
+
 print(sx1, sy1, sx2, sy2)
 
 #punktu skaitīšana....
@@ -88,7 +89,7 @@ def punkti():
 # REZULTATU TABLO
 
 def rezultatutablo():
-    buttonBG = logs.create_rectangle(100, 0, 200, 30, fill="red", outline="grey60")
+    buttonBG = logs.create_rectangle(100, 0, 200, 30, fill="yellow", outline="grey60")
     buttonTXT = logs.create_text(150, 15,  font=(None, 25), text=rezultats)
 
 
