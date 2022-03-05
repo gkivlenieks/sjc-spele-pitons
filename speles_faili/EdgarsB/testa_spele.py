@@ -58,18 +58,21 @@ def punkti():
 
     if pxx==sx1 and pxy==sy1:
         logs.delete(sene1)
-        print("seeeneee")
+        print("seeeneee 1")
         rezultats = rezultats +1
         
     if pxx==sx2 and pxy==sy2:
         logs.delete(sene2)
-        print("seeeneee")
+        print("seeeneee 2")
         rezultats = rezultats +1
+    
+    if rezultats == 2 :
+        uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="SPēle uzvarēta!!!!")
         
 # REZULTATU TABLO
 
 def rezultatutablo():
-    buttonBG = logs.create_rectangle(100, 0, 200, 30, fill="grey40", outline="grey60")
+    buttonBG = logs.create_rectangle(100, 0, 200, 30, fill="red", outline="grey60")
     buttonTXT = logs.create_text(150, 15,  font=(None, 25), text=rezultats)
 
 
