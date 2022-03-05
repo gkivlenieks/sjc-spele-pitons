@@ -1,6 +1,8 @@
 from calendar import c
 from tkinter import *
 import random
+
+from numpy import true_divide
 canvas_width = 900
 canvas_height = 900
 master = Tk()
@@ -35,6 +37,7 @@ sy1 = random.randrange(100, 800, 150)
 #print(sy)
 sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm")
 sene1 = logs.create_image(sx1, sy1, image=sene)
+sene1status = 0
 
 #Sēne 2
 sx2 = random.randrange(100, 800, 150)
@@ -46,7 +49,7 @@ print(sx1, sy1, sx2, sy2)
 
 #punktu skaitīšana....
 def punkti():
-    global sx1, sy1, sx2, sy2, rezultats
+    global sx1, sy1, sx2, sy2, rezultats, sene1status
     
     px = logs.coords(player)
     pxx = int(px[0])
@@ -56,17 +59,18 @@ def punkti():
     print(rezultats)
     rezultatutablo()
 
-    if pxx==sx1 and pxy==sy1:
+    if pxx==sx1 and pxy==sy1 and sene1status==0:
         logs.delete(sene1)
         print("seeeneee 1")
         rezultats = rezultats +1
+        sene1status = sene1status + 1
         
     if pxx==sx2 and pxy==sy2:
         logs.delete(sene2)
         print("seeeneee 2")
         rezultats = rezultats +1
     
-    if rezultats == 2 :
+    if rezultats == 5 :
         uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="SPēle uzvarēta!!!!")
         
 # REZULTATU TABLO
