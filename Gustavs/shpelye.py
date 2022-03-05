@@ -23,6 +23,13 @@ grass = PhotoImage(file='Gustavs/assets/graaas.ppm')
 #fons
 bukgronds = logs.create_image(CW // 2, CH // 2, image= grass)
 # mushroom
+# pa cik pikseļiem playeris pārvietojas
+pstep = 5
+# backgrounds
+grass = PhotoImage(file='Gustavs/assets/graaas.ppm')
+#fons
+bukgronds = logs.create_image(CW // 2, CH // 2, image= grass)
+# sēne bildes izmēri, pa cik bilde tiks uztaisīta mazāka, tās uzlikšana
 mushM = 5
 mushroom = Image.open('gustavs/assets/Mushroom.png')
 MushSiz = mushroom.size
@@ -62,6 +69,40 @@ def playahmove(way):
     elif way == 'down':
         py += pstep
     logs.delete(playah)
+
+#logs ir/nav resizable
+master.resizable(False, False)
+#vai spēlētājs skatās pa labi
+m = True
+#speletāja kustības funkcija
+def playahmove(way):
+    global px, py, playah, marijo, ma, m
+    #vai būs jāmirroro bilde
+    w = False
+    #pārbauda kurā virziena tas jāpārvieto
+    if way == 'right':
+        #vai tam jāskatās pa labi
+        mm = True
+        #x koordinātu maiņa
+        px += pstep
+        #vai to būs jāmirroro
+        w = True
+    elif way == 'left':
+        #vai tam jāskatās pa labi
+        mm = False
+        #x koordinātu maiņa
+        px -= pstep
+        #vai to būs jāmirroro
+        w = True
+    elif way == 'up':
+        #y koordinātu maiņa
+        py -= pstep
+    elif way == 'down':
+        #y koordinātu maiņa
+        py += pstep
+    #izdzēš iepriekšejo bildīti
+    logs.delete(playah)
+    #pārbauda vai to jāmirroro
     if w and mm == False and m == True:
         m = False
         marijo = ImageOps.mirror(marijo)
@@ -70,6 +111,7 @@ def playahmove(way):
         m = True
         marijo = ImageOps.mirror(marijo)
         ma = ImageTk.PhotoImage(marijo)
+    #izveido jaunu bildīti un uzliek w uz False
     playah = logs.create_image(px, py, image = ma)
     w = False
 
