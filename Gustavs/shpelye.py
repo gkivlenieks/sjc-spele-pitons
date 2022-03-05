@@ -35,7 +35,9 @@ mushroom = Image.open('gustavs/assets/Mushroom.png')
 MushSiz = mushroom.size
 mushroom = mushroom.resize((MushSiz[0] // mushM, MushSiz[1] // mushM))
 seene = ImageTk.PhotoImage(mushroom)
-sene = logs.create_image(random.randrange(20, CW - 20, 5), random.randrange(20, CH - 20, 5), image= seene)
+sx = random.randrange(20, CW - 20, 5)
+sy = random.randrange(20, CH - 20, 5)
+sene = logs.create_image(sx, sy, image= seene)
 #mario
 ImgM = 10
 marijo = Image.open('Gustavs/assets/BMario-NoBG.png')
@@ -81,28 +83,18 @@ def playahmove(way):
     w = False
     #pārbauda kurā virziena tas jāpārvieto
     if way == 'right':
-        #vai tam jāskatās pa labi
         mm = True
-        #x koordinātu maiņa
         px += pstep
-        #vai to būs jāmirroro
         w = True
     elif way == 'left':
-        #vai tam jāskatās pa labi
         mm = False
-        #x koordinātu maiņa
         px -= pstep
-        #vai to būs jāmirroro
         w = True
     elif way == 'up':
-        #y koordinātu maiņa
         py -= pstep
     elif way == 'down':
-        #y koordinātu maiņa
         py += pstep
-    #izdzēš iepriekšejo bildīti
     logs.delete(playah)
-    #pārbauda vai to jāmirroro
     if w and mm == False and m == True:
         m = False
         marijo = ImageOps.mirror(marijo)
@@ -111,7 +103,6 @@ def playahmove(way):
         m = True
         marijo = ImageOps.mirror(marijo)
         ma = ImageTk.PhotoImage(marijo)
-    #izveido jaunu bildīti un uzliek w uz False
     playah = logs.create_image(px, py, image = ma)
     w = False
 
