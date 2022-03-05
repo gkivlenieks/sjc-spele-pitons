@@ -51,7 +51,17 @@ sene3 = logs.create_image(sx3, sy3, image=sene)
 sene3status = 0
 
 # UZTAISĪT 5- 10 sēnes!!!!
-
+xkoordinates = []
+ykoordinates = []
+senes = [0,1,2,3,4,5,6,7,8,9]
+i = 0
+for i in senes:
+    xkoordinates[i] = xkoordinates.append(random.randrange(100, 800, 150))
+    ykoordinates[i] = ykoordinates.append(random.randrange(100, 800, 150))
+    senes[i] = logs.create_image(xkoordinates[i], ykoordinates[i], image=sene)
+    i+=1
+print(xkoordinates)
+print(ykoordinates)
 
 print(sx1, sy1, sx2, sy2)
 
@@ -89,7 +99,7 @@ def punkti():
 # REZULTATU TABLO
 
 def rezultatutablo():
-    buttonBG = logs.create_rectangle(100, 0, 200, 30, fill="yellow", outline="grey60")
+    buttonBG = logs.create_rectangle(100, 0, 200, 30, fill="red", outline="grey60")
     buttonTXT = logs.create_text(150, 15,  font=(None, 25), text=rezultats)
 
 
