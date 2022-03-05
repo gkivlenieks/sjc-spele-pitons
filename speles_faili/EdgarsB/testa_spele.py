@@ -54,6 +54,8 @@ def punkti():
     #print(pxx, pxy, sx1, sy1 )
     # pirmā sēne noķerta... 
     print(rezultats)
+    rezultatutablo()
+
     if pxx==sx1 and pxy==sy1:
         logs.delete(sene1)
         print("seeeneee")
@@ -64,6 +66,13 @@ def punkti():
         print("seeeneee")
         rezultats = rezultats +1
         
+# REZULTATU TABLO
+
+def rezultatutablo():
+    buttonBG = logs.create_rectangle(100, 0, 200, 30, fill="grey40", outline="grey60")
+    buttonTXT = logs.create_text(150, 15,  font=(None, 25), text=rezultats)
+
+
 
 #KUSTĪBA _ staigājam apkārt...
 player = logs.create_image(250,250, image = sarkG)
