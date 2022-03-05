@@ -1,7 +1,6 @@
 from tkinter import *
 from PIL import Image, ImageTk, ImageOps
 import random
-import time
 
 master = Tk()
 punkti = 0
