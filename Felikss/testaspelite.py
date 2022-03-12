@@ -21,17 +21,17 @@ master.title("Līnijas spēle")
 logs.pack()
 
 #Izveidojam spēlētāju (bilde)
-sarkG = PhotoImage(file="sjc-spele-pitons\Felikss\sarkvideja.ppm")
+sarkG = PhotoImage(file="Felikss\sarkvideja.ppm")
 #logs.create_image(250,250, image= sarkG)
 player = logs.create_image(250,250, image = sarkG)
 logs.delete(player)
 
 #Fona attēla iestatīšana... (svarīgs izmērs - der PNG)
-fons = PhotoImage(file="sjc-spele-pitons\Felikss\mezs_sss.png")
+fons = PhotoImage(file="Felikss\mezs_sss.png")
 logs.create_image(0,0, image=fons)
 
 # SĒNES 
-sene = PhotoImage(file="sjc-spele-pitons\Felikss\semene.ppm") 
+sene = PhotoImage(file="Felikss\semene.ppm") 
 
 # UZTAISĪT sēnes (mainot masīva izmēru var veidot vairāk sēnes)!!!!
 xkoordinates = []
