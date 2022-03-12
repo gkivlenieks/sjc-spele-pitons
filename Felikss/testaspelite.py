@@ -2,7 +2,7 @@ from calendar import c
 from tkinter import *
 import random
 
-from numpy import true_divide
+#from numpy import true_divide
 canvas_width = 900
 canvas_height = 900
 master = Tk()
@@ -21,48 +21,34 @@ master.title("Līnijas spēle")
 logs.pack()
 
 #Izveidojam spēlētāju (bilde)
-sarkG = PhotoImage(file="SJC-SPELE-PITONS\Felikss\sarkvideja.ppm")
-logs.create_image(250,250, image= sarkG)
+sarkG = PhotoImage(file="sjc-spele-pitons\Felikss\sarkvideja.ppm")
+#logs.create_image(250,250, image= sarkG)
 player = logs.create_image(250,250, image = sarkG)
 logs.delete(player)
 
 #Fona attēla iestatīšana... (svarīgs izmērs - der PNG)
-fons = PhotoImage(file="SJC-SPELE-PITONS\Felikss\mezs_sss.png")
+fons = PhotoImage(file="sjc-spele-pitons\Felikss\mezs_sss.png")
 logs.create_image(0,0, image=fons)
 
-# SĒNES (15 elementi mapē)
-sene = PhotoImage(file="SJC-SPELE-PITONS\Felikss\semene.ppm") 
-# sēne 1
-#sx1 = random.randrange(100, 800, 150)
-#sy1 = random.randrange(100, 800, 150)
-#sene1 = logs.create_image(sx1, sy1, image=sene)
-#sene1status = 0
+# SĒNES 
+sene = PhotoImage(file="sjc-spele-pitons\Felikss\semene.ppm") 
 
-#Sēne 2
-#sx2 = random.randrange(100, 800, 150)
-#sy2 = random.randrange(100, 800, 150)
-#sene2 = logs.create_image(sx2, sy2, image=sene)
-#sene2status = 0
-
-#Sēne 3
-#sx3 = random.randrange(100, 800, 150)
-#sy3 = random.randrange(100, 800, 150)
-#sene3 = logs.create_image(sx3, sy3, image=sene)
-#sene3status = 0
-
-# UZTAISĪT 5- 10 sēnes!!!!
+# UZTAISĪT sēnes (mainot masīva izmēru var veidot vairāk sēnes)!!!!
 xkoordinates = []
 ykoordinates = []
-senes =[1,1,1,1,1,1,1,1,1,1]
-print(senes)
+senesst = []
+senes = []
+
 for i in range(10):
     xkoordinates.append(random.randrange(100, 800, 150))
-    ykoordinates.append(random.randrange(100, 800, 150))  
+    ykoordinates.append(random.randrange(100, 800, 150))
+    senesst.append(0)  
+    senes.append(i)
 
 for i in range(10):
     senes[i] = logs.create_image(xkoordinates[i], ykoordinates[i], image=sene)
+    
 
-senesst =[0,0,0,0,0,0,0,0,0,0]
 print(senesst)
 print(senes)
 print(xkoordinates)
@@ -85,31 +71,17 @@ def punkti():
     rezultatutablo()
 
     for i in range(10):
-        if pxx==xkoordinates[i] and pxy==ykoordinates[i] and senesst[i]==0:
+        if (xkoordinates[i]-30)<pxx<(xkoordinates[i]+30) and (ykoordinates[i]-30)<pxy<(ykoordinates[i]+30) and senesst[i]==0:
             logs.delete(senes[i])
             print(i)
+            print(px)
             rezultats = rezultats +1
             senesst[i]= senesst[i] + 1
             print(rezultats)
 
-
- #   if pxx==sx1 and pxy==sy1 and sene1status==0:
- #       logs.delete(sene1)
- #       print("seeeneee 1")
- #       rezultats = rezultats +1
- #       sene1status = sene1status + 1
-        
- #   if pxx==sx2 and pxy==sy2:
- #       logs.delete(sene2)
- #       print("seeeneee 2")
- #       rezultats = rezultats +1
     
- #   if pxx==sx3 and pxy==sy3:
- #       logs.delete(sene3)
- #       print("seeeneee 3")
- #       rezultats = rezultats +1
-    
-    if rezultats == 5 :
+    if rezultats == 10 :
+        uzvarteksts1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
         uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="SPēle uzvarēta!!!!")
         
 # REZULTATU TABLO
@@ -122,6 +94,7 @@ def rezultatutablo():
 
 #KUSTĪBA _ staigājam apkārt...
 player = logs.create_image(250,250, image = sarkG)
+# vilks = .... (333???)
 def move():
     global x_vel
     global y_vel
@@ -129,6 +102,7 @@ def move():
     if direction is not None:
         logs.move(player, x_vel,y_vel)
         punkti()
+        #kustināt vilku... 
         #after(33,move)
 
 def on_keypress(event):
