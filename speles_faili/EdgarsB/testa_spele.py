@@ -62,7 +62,8 @@ for i in range(10):
 for i in range(10):
     senes[i] = logs.create_image(xkoordinates[i], ykoordinates[i], image=sene)
 
-senes =[0,0,0,0,0,0,0,0,0,0]
+senesst =[0,0,0,0,0,0,0,0,0,0]
+print(senesst)
 print(senes)
 print(xkoordinates)
 print(ykoordinates)
@@ -72,16 +73,24 @@ print(ykoordinates)
 
 #punktu skaitīšana....
 def punkti():
-    global sx1, sy1, sx2, sy2, sx3, sy3, rezultats, sene1status, sene2status, sene3status
+    # global sx1, sy1, sx2, sy2, sx3, sy3, rezultats, sene1status, sene2status, sene3status
+    global rezultats, senesst, senes, xkoordinates, ykoordinates
     
     px = logs.coords(player)
     pxx = int(px[0])
     pxy = int(px[1])
     #print(pxx, pxy, sx1, sy1 )
     # pirmā sēne noķerta... 
-    print(rezultats)
+    # print(rezultats)
     rezultatutablo()
 
+    for i in range(10):
+        if pxx==xkoordinates[i] and pxy==ykoordinates[i] and senesst[i]==0:
+            logs.delete(senes[i])
+            print(i)
+            rezultats = rezultats +1
+            senesst[i]= senesst[i] + 1
+            print(rezultats)
 
 
  #   if pxx==sx1 and pxy==sy1 and sene1status==0:
