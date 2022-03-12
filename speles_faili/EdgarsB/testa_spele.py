@@ -109,6 +109,7 @@ def rezultatutablo():
 
 #KUSTĪBA _ staigājam apkārt...
 player = logs.create_image(250,250, image = sarkG)
+# vilks = .... (333???)
 def move():
     global x_vel
     global y_vel
@@ -116,6 +117,7 @@ def move():
     if direction is not None:
         logs.move(player, x_vel,y_vel)
         punkti()
+        #kustināt vilku... 
         #after(33,move)
 
 def on_keypress(event):
