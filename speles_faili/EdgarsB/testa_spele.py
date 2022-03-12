@@ -53,7 +53,8 @@ sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm")
 # UZTAISĪT 5- 10 sēnes!!!!
 xkoordinates = []
 ykoordinates = []
-senes =[0,1,2,3,4,5,6,7,8,9]
+senes =[1,1,1,1,1,1,1,1,1,1]
+print(senes)
 for i in range(10):
     xkoordinates.append(random.randrange(100, 800, 150))
     ykoordinates.append(random.randrange(100, 800, 150))  
@@ -61,6 +62,7 @@ for i in range(10):
 for i in range(10):
     senes[i] = logs.create_image(xkoordinates[i], ykoordinates[i], image=sene)
 
+senes =[0,0,0,0,0,0,0,0,0,0]
 print(senes)
 print(xkoordinates)
 print(ykoordinates)
@@ -80,21 +82,23 @@ def punkti():
     print(rezultats)
     rezultatutablo()
 
-    if pxx==sx1 and pxy==sy1 and sene1status==0:
-        logs.delete(sene1)
-        print("seeeneee 1")
-        rezultats = rezultats +1
-        sene1status = sene1status + 1
+
+
+ #   if pxx==sx1 and pxy==sy1 and sene1status==0:
+ #       logs.delete(sene1)
+ #       print("seeeneee 1")
+ #       rezultats = rezultats +1
+ #       sene1status = sene1status + 1
         
-    if pxx==sx2 and pxy==sy2:
-        logs.delete(sene2)
-        print("seeeneee 2")
-        rezultats = rezultats +1
+ #   if pxx==sx2 and pxy==sy2:
+ #       logs.delete(sene2)
+ #       print("seeeneee 2")
+ #       rezultats = rezultats +1
     
-    if pxx==sx3 and pxy==sy3:
-        logs.delete(sene3)
-        print("seeeneee 3")
-        rezultats = rezultats +1
+ #   if pxx==sx3 and pxy==sy3:
+ #       logs.delete(sene3)
+ #       print("seeeneee 3")
+ #       rezultats = rezultats +1
     
     if rezultats == 5 :
         uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="SPēle uzvarēta!!!!")
