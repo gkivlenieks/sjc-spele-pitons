@@ -30,39 +30,25 @@ logs.delete(player)
 fons = PhotoImage(file="speles_faili\EdgarsB\mezs_sss.png")
 logs.create_image(0,0, image=fons)
 
-# SĒNES (15 elementi mapē)
+# SĒNES 
 sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm") 
-# sēne 1
-#sx1 = random.randrange(100, 800, 150)
-#sy1 = random.randrange(100, 800, 150)
-#sene1 = logs.create_image(sx1, sy1, image=sene)
-#sene1status = 0
 
-#Sēne 2
-#sx2 = random.randrange(100, 800, 150)
-#sy2 = random.randrange(100, 800, 150)
-#sene2 = logs.create_image(sx2, sy2, image=sene)
-#sene2status = 0
-
-#Sēne 3
-#sx3 = random.randrange(100, 800, 150)
-#sy3 = random.randrange(100, 800, 150)
-#sene3 = logs.create_image(sx3, sy3, image=sene)
-#sene3status = 0
-
-# UZTAISĪT 5- 10 sēnes!!!!
+# UZTAISĪT sēnes (mainot masīva izmēru var veidot vairāk sēnes)!!!!
 xkoordinates = []
 ykoordinates = []
-senes =[1,1,1,1,1,1,1,1,1,1]
-print(senes)
+senesst = []
+senes = []
+
 for i in range(10):
     xkoordinates.append(random.randrange(100, 800, 150))
-    ykoordinates.append(random.randrange(100, 800, 150))  
+    ykoordinates.append(random.randrange(100, 800, 150))
+    senesst.append(0)  
+    senes.append(i)
 
 for i in range(10):
     senes[i] = logs.create_image(xkoordinates[i], ykoordinates[i], image=sene)
+    
 
-senesst =[0,0,0,0,0,0,0,0,0,0]
 print(senesst)
 print(senes)
 print(xkoordinates)
@@ -85,9 +71,10 @@ def punkti():
     rezultatutablo()
 
     for i in range(10):
-        if pxx==xkoordinates[i] and pxy==ykoordinates[i] and senesst[i]==0:
+        if (xkoordinates[i]-30)<pxx<(xkoordinates[i]+30) and (ykoordinates[i]-30)<pxy<(ykoordinates[i]+30) and senesst[i]==0:
             logs.delete(senes[i])
             print(i)
+            print(px)
             rezultats = rezultats +1
             senesst[i]= senesst[i] + 1
             print(rezultats)
