@@ -21,7 +21,7 @@ master.title("Līnijas spēle")
 logs.pack()
 
 #Izveidojam spēlētāju (bilde)
-sarkG = PhotoImage(file="sjc-spele-pitons\Felikss\sarkvideja.png")
+sarkG = PhotoImage(file="sjc-spele-pitons\Felikss\sark_videja.ppm")
 logs.create_image(250,250, image= sarkG)
 player = logs.create_image(250,250, image = sarkG)
 logs.delete(player)
