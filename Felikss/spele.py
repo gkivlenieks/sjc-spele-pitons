@@ -9,7 +9,6 @@ w = Canvas(master,
            height=canvas_height)
 master.title("Līnijas spēle")
 
-# KOMENTĀRI!!! 
 w.pack()
 c
 x1=300
@@ -20,148 +19,113 @@ e=5
 f='blue'
 teksts=30
 g=100
-def clicked(event):
-    print("pressed")
-    e=30
-    w.create_image(50,400, image = bilde)
+#mainīgie par kustību!!!!
+x = 10
+y = 10
+a = 100
+b = 100
+direction = None
+
+#def clicked(event):
+#    print("pressed")
+#    e=30
+#    w.create_image(50,400, image = bilde)
 
 #SPĒLES ELEMENTI (8 krāsu maiņas eleemtni / 5 biezuma maiņas)
-b = w.create_line(300, 270, 300, 260, width=10, fill='red')
-w.create_line(300, 240, 300, 230, width=10, fill='yellow')
-w.create_line(300, 150, 300, 160, width=10, fill='green')
-w.create_line(300, 200, 300, 190, width=10, fill='black')
-w.create_line(300, 120, 300, 130, width=10, fill='brown')
-w.create_line(300, 400, 300, 410, width=10, fill='orange')
-bilde = PhotoImage(file="Felikss\istaismezs.ppm")
-speletajs = PhotoImage(file="Felikss\speletajs.ppm")
-w.create_image(900,900, image = bilde)
-player = w.create_image(0,0, image = speletajs)
+#b = w.create_line(300, 270, 300, 260, width=10, fill='red')
+#w.create_line(300, 240, 300, 230, width=10, fill='yellow')
+#w.create_line(300, 150, 300, 160, width=10, fill='green')
+#w.create_line(300, 200, 300, 190, width=10, fill='black')
+#w.create_line(300, 120, 300, 130, width=10, fill='brown')
+#w.create_line(300, 400, 300, 410, width=10, fill='orange')
+bilde = PhotoImage(file="SPELES_arhivs\semene.ppm")
+pika = PhotoImage(file="SPELES_arhivs\pika.ppm")
+#w.create_image(50,400, image = bilde)
+player = w.create_image(0,0, image = pika)
 w.delete(player)
+
+
+
+
+#def biezums():
+#    global g
+#    buttonBG = w.create_rectangle(100, 0, 200, 30, fill="grey40", outline="grey60")
+#    buttonTXT = w.create_text(150, 15, text= g)
+#    w.tag_bind(buttonBG, "<Button-1>", clicked) ## when the square is clicked runs function "clicked".
+#    w.tag_bind(buttonTXT, "<Button-1>", clicked) ## same, but for the text.
+
+
+#iezums()
+
+player =w.create_image(x2,y2, image = pika)
+
+# KUSTĪBU KOORDINĀCIJ!!!!
+def move():
+    global x_vel
+    global y_vel
+    global direction
+    if direction is not None:
+        w.move(player, x_vel,y_vel)
+        punkti()
+        #after(33,move)
+
+def on_keypress(event):
+    global direction
+    global x_vel
+    global y_vel
+    if event.keysym == "Left":
+        direction = "left"
+        x_vel = -5
+        y_vel = 0
+    if event.keysym == "Right":
+        direction = "right"
+        x_vel = 5
+        y_vel = 0
+    if event.keysym == "Down":
+        direction = "down"
+        x_vel = 0
+        y_vel = 5
+    if event.keysym == "Up":
+        direction = "up"
+        x_vel = 0
+        y_vel = -5
+    
+    move()
+    koordinates = w.coords(player)
+    print(koordinates)
+
+def on_keyrelease(event):
+    global direction
+    direction = None
+
 def punkti():
-    global teksts
-    buttonBG1 = w.create_rectangle(0, 0, 100, 30, fill="grey40", outline="grey60")
-    buttonTXT1 = w.create_text(50, 15, text=teksts)
-    if teksts==40:
-        teksts="GAME OVER"
+    px = w.coords(player)
+    pxx = px[0]
+    pxy = px[1]
+    ob = random.randrange(50,600)
+    oy = random.randrange(50,600)
+    print(ob, oy)
+    w.create_image(ob,oy, image = bilde)
+    if pxx == ob and oy == 250:
+        print("uzvara")
+        w.create_image(ob,oy, image = bilde)
+    if pxx == 300 and pxy == 300:
+        w.create_image(200,300, image = bilde)
+  # ja spēlētāja koordinātes (pxx un pxy) ir kaut kas - tad varam kaut ko izdarīt...
+    
 
 
 
-def biezums():
-    global g
-    buttonBG = w.create_rectangle(100, 0, 200, 30, fill="grey40", outline="grey60")
-    buttonTXT = w.create_text(150, 15, text= g)
-    w.tag_bind(buttonBG, "<Button-1>", clicked) ## when the square is clicked runs function "clicked".
-    w.tag_bind(buttonTXT, "<Button-1>", clicked) ## same, but for the text.
+#objekti = w.find_all()
+#print(objekti)
+#for objekti in objekti:
+#    print(w.coords(objekti))
+#px = w.coords(player)
+#pxx = px[0]
+#pxy = px[1]
+#print(pxx)
+#print(pxy)
 
-punkti()
-biezums()
-#w variants (uz augsu)
-def uzaugsu():
-    global x1, y1, x2, y2, e, f, c, player
-    w.delete(player)
-    x2=x1+0
-    y2=y1-10
-    c = w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player =w.create_image(x2,y2, image = speletajs)
-    x1=x2
-    y1=y2
-    print(x1)
-    print(y1)
-#d variants (pa labi)
-def palabi():
-    global x1, y1, x2, y2, e, f, c, player
-    w.delete(c)
-    w.delete(player)
-    x2=x1+10
-    y2=y1+0
-    w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player = w.create_image(x2,y2, image = speletajs)
-    x1=x2
-    y1=y2
-    print(x1)
-    print(y1)
-#a variants (pa kreisi)
-def pakreisi():
-    global x1, y1, x2, y2, e, f, player
-    x2=x1-10
-    y2=y1+0
-    w.delete(player)
-    w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player = w.create_image(x2,y2, image = speletajs)
-    x1=x2
-    y1=y2
-    print(x1)
-    print(y1)
-#s variants (uz leju)
-def uzleju():
-    global x1, y1, x2, y2, e, f, player
-    x2=x1+0
-    y2=y1+10
-    w.delete(player)
-    w.create_line(x1, y1, x2, y2, width=e, fill=f )
-    player = w.create_image(x2,y2, image = speletajs)
-    x1=x2
-    y1=y2
-    print(x1)
-    print(y1)
-
-def salidzinam():
-    global x2,y2, e, f, teksts
-    print(x2)
-    print(y2)
-    if (x2==300 and y2==260):
-        e=20
-        print('palielinam')  
-        teksts = teksts -5 
-        punkti()
-    if (x2==300 and y2==240):
-        f='black'
-        print('krasojam')
-        teksts = teksts + 5
-        punkti()
-    if (x2==300 and y2==190):
-        #if ( 30 < x2 < 100 and y2=21220 ) >>> dzīvības -1 
-        if f=='black':
-            e=e+15
-            teksts = teksts + 10
-            punkti()
-        else: 
-            e=e    
-    print('lielaks ar krasu')
-
-
-while g>0:
-    k = input('virziens')
-    if k=='w':
-        uzaugsu()
-        salidzinam()
-        punkti()
-        g=g-1
-        biezums()
-    if g==0:
-        break    
-    if k =='s':
-        uzleju()
-        punkti()
-        g=g-1
-    if g==0:
-        break 
-    if k =='a':
-        pakreisi()
-        punkti()
-        w.delete(b)
-        g=g-1
-    if g==0:
-        break 
-    if k =='d':
-        palabi()    
-        g=g-1
-    if g==0:
-        break 
-
-
-
-
-
-mainloop()
-
+master.bind_all('<KeyPress>', on_keypress)
+master.bind_all('<KeyRelease>', on_keyrelease)
+master.mainloop()
