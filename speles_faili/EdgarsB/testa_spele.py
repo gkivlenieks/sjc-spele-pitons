@@ -79,24 +79,9 @@ def punkti():
             senesst[i]= senesst[i] + 1
             print(rezultats)
 
-
- #   if pxx==sx1 and pxy==sy1 and sene1status==0:
- #       logs.delete(sene1)
- #       print("seeeneee 1")
- #       rezultats = rezultats +1
- #       sene1status = sene1status + 1
-        
- #   if pxx==sx2 and pxy==sy2:
- #       logs.delete(sene2)
- #       print("seeeneee 2")
- #       rezultats = rezultats +1
     
- #   if pxx==sx3 and pxy==sy3:
- #       logs.delete(sene3)
- #       print("seeeneee 3")
- #       rezultats = rezultats +1
-    
-    if rezultats == 5 :
+    if rezultats == 10 :
+        uzvarteksts1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
         uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="SPēle uzvarēta!!!!")
         
 # REZULTATU TABLO
