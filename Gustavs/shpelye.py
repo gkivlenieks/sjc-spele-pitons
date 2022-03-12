@@ -52,11 +52,14 @@ for x in range(mushcnt):
     print(f'generated mushroom{x} at {globals()[f"mush{x}x"]}; {globals()[f"mush{x}y"]}')
 
 def mushrum(m):
+    global slep
     globals()[f'mush{m}x'] = random.randrange(20, CW - 20, 5)
     globals()[f'mush{m}y'] = random.randrange(20, CH - 20, 5)
     globals()[f"mush{m}"] = logs.create_image(globals()[f'mush{m}x'], globals()[f'mush{m}y'], image=seene)
     nx = threading.Thread(target=sound, daemon=True)
     nx.start()
+    slep /= 1.5
+    print(f'slep: {slep}')
 
 
 #mario
@@ -80,8 +83,9 @@ slime = ImageTk.PhotoImage(slimee)
 slim = logs.create_image(slx, sly, image = slime)
 
 def smove():
-    global slx, sly, slim
+    global slx, sly, slim, slep
     sterp = 1
+    slep = .025
     while 1:
         if slx == px and sly == py:
             print('hehe')
@@ -95,7 +99,7 @@ def smove():
             sly -= sterp
         logs.delete(slim)
         slim = logs.create_image(slx, sly, image = slime)
-        time.sleep(.025)
+        time.sleep(slep)
 
 slm =  threading.Thread(target=smove, daemon=False)
 
