@@ -33,37 +33,40 @@ logs.create_image(0,0, image=fons)
 # SĒNES (15 elementi mapē)
 sene = PhotoImage(file="speles_faili\EdgarsB\semene.ppm") 
 # sēne 1
-sx1 = random.randrange(100, 800, 150)
-sy1 = random.randrange(100, 800, 150)
-sene1 = logs.create_image(sx1, sy1, image=sene)
-sene1status = 0
+#sx1 = random.randrange(100, 800, 150)
+#sy1 = random.randrange(100, 800, 150)
+#sene1 = logs.create_image(sx1, sy1, image=sene)
+#sene1status = 0
 
 #Sēne 2
-sx2 = random.randrange(100, 800, 150)
-sy2 = random.randrange(100, 800, 150)
-sene2 = logs.create_image(sx2, sy2, image=sene)
-sene2status = 0
+#sx2 = random.randrange(100, 800, 150)
+#sy2 = random.randrange(100, 800, 150)
+#sene2 = logs.create_image(sx2, sy2, image=sene)
+#sene2status = 0
 
 #Sēne 3
-sx3 = random.randrange(100, 800, 150)
-sy3 = random.randrange(100, 800, 150)
-sene3 = logs.create_image(sx3, sy3, image=sene)
-sene3status = 0
+#sx3 = random.randrange(100, 800, 150)
+#sy3 = random.randrange(100, 800, 150)
+#sene3 = logs.create_image(sx3, sy3, image=sene)
+#sene3status = 0
 
 # UZTAISĪT 5- 10 sēnes!!!!
 xkoordinates = []
 ykoordinates = []
-senes = [0,1,2,3,4,5,6,7,8,9]
-i = 0
-for i in senes:
-    xkoordinates[i] = xkoordinates.append(random.randrange(100, 800, 150))
-    ykoordinates[i] = ykoordinates.append(random.randrange(100, 800, 150))
+senes =[0,1,2,3,4,5,6,7,8,9]
+for i in range(10):
+    xkoordinates.append(random.randrange(100, 800, 150))
+    ykoordinates.append(random.randrange(100, 800, 150))  
+
+for i in range(10):
     senes[i] = logs.create_image(xkoordinates[i], ykoordinates[i], image=sene)
-    i+=1
+
+print(senes)
 print(xkoordinates)
 print(ykoordinates)
 
-print(sx1, sy1, sx2, sy2)
+
+#print(sx1, sy1, sx2, sy2)
 
 #punktu skaitīšana....
 def punkti():
