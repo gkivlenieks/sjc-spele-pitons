@@ -58,6 +58,7 @@ def speletajs():
 #STARTA MENU - sākuma izvēlne (vēl nav uz loga nekas izveidots - tagad izveido "menu, kuru nospiežot tiek izsaukta funkcija (nākamā) nospiests")
 # 2.funkcija
 def SakumaIzvelne():
+    logs.delete("all")
     print("Starta menu")
     global menu1, menu, menu2, menu3
     menu1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
@@ -74,14 +75,9 @@ def SakumaIzvelne():
 # 3.funkcija (ietvars spēlei...)
 
 def nospiests2(none):
+    logs.delete("all")
     global uzvpunkti, p1, p1t
     print("otrā izvēlne")
-    logs.delete(menu1)
-    logs.delete(menu)
-    logs.delete(uzvarteksts1)
-    logs.delete(uzvarteksts)
-    logs.delete(menu2)
-    logs.delete(menu3)
     # KAS IR JĀMAINA lai padarītu - vieglāku vai grūtāku??!!! uzvpunkti = 10
     # VIEGLA SPĒLE - jāsalas 3 sēnes, vidējas spēle - 7 sēnes, Grūta spēle - 10! 
     #VIEGLS, VIDĒJS, GRŪTS... POGU SĀKT SPĒLI ar izvēlēto pakāpi...
@@ -108,10 +104,7 @@ def videjs(none):
 
 def nospiests(none):
     print("nospiests")
-    logs.delete(menu1)
-    logs.delete(menu)
-    logs.delete(uzvarteksts1)
-    logs.delete(uzvarteksts)
+    logs.delete("all")
     global xkoordinates, ykoordinates, senes, senesst,sene, fons, sarkG
     logs.create_image(0,0, image=fons)
     xkoordinates.clear()
@@ -155,8 +148,8 @@ def punkti():
         global uzvarteksts, uzvarteksts1
         uzvarteksts1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
         uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="Spēle uzvarēta!!!!")
-        logs.tag_bind(uzvarteksts, "<Button-1>", nospiests)
-        logs.tag_bind(uzvarteksts1, "<Button-1>", nospiests)
+        logs.tag_bind(uzvarteksts, "<Button-1>", nospiests2)
+        logs.tag_bind(uzvarteksts1, "<Button-1>", nospiests2)
         rezultats = 0
 
 # REZULTATU TABLO (lauks, kurā mainās rezultāts (globālie punkti))
