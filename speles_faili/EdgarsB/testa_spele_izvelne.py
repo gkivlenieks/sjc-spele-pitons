@@ -64,7 +64,8 @@ def SakumaIzvelne(reize):
     pass
     logs.delete("all")
     print("Starta menu")
-    global menu1, menu, menu2, menu3
+    global menu1, menu, menu2, menu3, rezultats
+    rezultats = 0
     menu1 = logs.create_rectangle(150, 300, 750, 400, fill="white", outline="blue")
     menu = logs.create_text(450, 350,  font=(None, 50), text="SĀKT SPĒLI")
     logs.tag_bind(menu1, "<Button-1>", nospiests)
@@ -95,10 +96,13 @@ def nospiests2(none):
     logs.tag_bind(p1t, "<Button-1>", viegls)
     p2 = logs.create_rectangle(150, 320, 750, 420, fill="white", outline="blue")
     p2t = logs.create_text(450, 370,  font=(None, 30), text="VIDĒJS")
-    logs.tag_bind(p2, "<Button-1>", SakumaIzvelne, add=0)
-    logs.tag_bind(p2t, "<Button-1>", SakumaIzvelne, add=0)
+    logs.tag_bind(p2, "<Button-1>", videjs)
+    logs.tag_bind(p2t, "<Button-1>", videjs)
     #POGA UZ SĀKUMA IZVELNI???!!!
-
+    p3 = logs.create_rectangle(150, 420, 750, 520, fill="white", outline="blue")
+    p3t = logs.create_text(450, 470,  font=(None, 30), text="Atgriezties atpakaļ")
+    logs.tag_bind(p3, "<Button-1>", SakumaIzvelne, add=0)
+    logs.tag_bind(p3t, "<Button-1>", SakumaIzvelne, add=0)
 def viegls(none):
     global uzvpunkti
     uzvpunkti = 3
@@ -155,10 +159,11 @@ def punkti():
     if rezultats == uzvpunkti or rezultats > uzvpunkti :
         # šis notiek kad "tiek savākti uzvaraspunkti punkti" - parādās "Spēle uzvarēta", kuru nospiežot tiek izsaukta funkcija "nospiests" - principā spēle resetojas!!!
         global uzvarteksts, uzvarteksts1
+        print(rezultats)
         uzvarteksts1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
         uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="Spēle uzvarēta!!!!")
-        logs.tag_bind(uzvarteksts, "<Button-1>", nospiests2)
-        logs.tag_bind(uzvarteksts1, "<Button-1>", nospiests2)
+        logs.tag_bind(uzvarteksts, "<Button-1>", SakumaIzvelne, add=0)
+        logs.tag_bind(uzvarteksts1, "<Button-1>", SakumaIzvelne, add=0)
         rezultats = 0
 
 # REZULTATU TABLO (lauks, kurā mainās rezultāts (globālie punkti))
