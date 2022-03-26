@@ -1,19 +1,20 @@
-from ast import While
-import threading, time
+from tkinter import *
+r = Tk()
 
-def xx():
-    time.sleep(5)
-    i = 0
-    while True:
-        print(f'i: {i}')
-        i += 1
-x = threading.Thread(target=xx, daemon=False)
+redy = IntVar()
 
-x.start()
-h = 0
-print('yo')
-time.sleep(1)
-while True:
-    print(f'h: {h}')
-    h += 1
+mainw = Canvas(
+    r,
+    width=500,
+    height=500
+)
+mainw.pack()
 
+def func():
+    print('whaaaaaaaat')
+
+kkas = mainw.create_rectangle(0, 0, 500, 200, fill='grey')
+
+mainw.tag_bind(kkas, "<Button-1>", func)
+
+r.mainloop()
