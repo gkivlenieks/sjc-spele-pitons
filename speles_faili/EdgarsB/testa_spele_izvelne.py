@@ -14,6 +14,8 @@ direction = None
 
 rezultats = 0
 
+uzvpunkti = 3
+
 #Izveidojam spelēs laukumu!!! neaizmirstam komandu .pack()
 logs = Canvas(master, 
            width=canvas_width, 
@@ -37,9 +39,15 @@ ykoordinates = []
 senesst = []
 senes = []
 
+# jāuztaisa ļaunie :) (tiekas uzbruks sarkangalvītei) >>>???
+
+
+
 #tukšie mainīgie (kas vēlāk tiek "apdzīvoti" (tie vēlāk vajadzīgi, lai izsauktu metodēs))
 uzvarteksts = None
 uzvarteksts1 = None
+#zaudetajteksts = None
+#zaudetajteksts1 = None
 
 #atsevišķa funkcija - kas "rada spēlētāju" 
 # 1.funkcija
@@ -51,17 +59,52 @@ def speletajs():
 # 2.funkcija
 def SakumaIzvelne():
     print("Starta menu")
-    global menu1, menu
+    global menu1, menu, menu2, menu3
     menu1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
     menu = logs.create_text(450, 450,  font=(None, 50), text="SĀKT SPĒLI")
     logs.tag_bind(menu1, "<Button-1>", nospiests)
     logs.tag_bind(menu, "<Button-1>", nospiests)
+    menu2 = logs.create_rectangle(150, 550, 750, 650, fill="white", outline="blue")
+    menu3 = logs.create_text(450, 600,  font=(None, 50), text="LĪMENIS")
+    logs.tag_bind(menu2, "<Button-1>", nospiests2)
+    logs.tag_bind(menu3, "<Button-1>", nospiests2)
 
 # funkcija nospiests (pa lielam uzāk spēli - pirmā lieta - nodzēš "izvēlnes pogas" (arī "uzvarastekstu)") un uzliek fona attēlu,
 # iztīra sēņu masīvus un uzģenēr jaunus, tad izsauc 1.funkciju "spēlētājs" )
 # 3.funkcija (ietvars spēlei...)
 
+def nospiests2(none):
+    global uzvpunkti, p1, p1t
+    print("otrā izvēlne")
+    logs.delete(menu1)
+    logs.delete(menu)
+    logs.delete(uzvarteksts1)
+    logs.delete(uzvarteksts)
+    logs.delete(menu2)
+    logs.delete(menu3)
+    # KAS IR JĀMAINA lai padarītu - vieglāku vai grūtāku??!!! uzvpunkti = 10
+    # VIEGLA SPĒLE - jāsalas 3 sēnes, vidējas spēle - 7 sēnes, Grūta spēle - 10! 
+    #VIEGLS, VIDĒJS, GRŪTS... POGU SĀKT SPĒLI ar izvēlēto pakāpi...
+    p1 = logs.create_rectangle(150, 200, 750, 300, fill="white", outline="blue")
+    p1t = logs.create_text(450, 250,  font=(None, 30), text="VIEGLS")
+    logs.tag_bind(p1, "<Button-1>", viegls)
+    logs.tag_bind(p1t, "<Button-1>", viegls)
+    p2 = logs.create_rectangle(150, 320, 750, 420, fill="white", outline="blue")
+    p2t = logs.create_text(450, 370,  font=(None, 30), text="VIDĒJS")
+    logs.tag_bind(p2, "<Button-1>", videjs)
+    logs.tag_bind(p2t, "<Button-1>", videjs)
 
+def viegls(none):
+    global uzvpunkti
+    uzvpunkti = 3
+    print("lai uzvarētu jāsavāc ir 3 punkti")
+    nospiests(none)
+
+def videjs(none):
+    global uzvpunkti
+    uzvpunkti = 7
+    print("lai uzvarētu jāsavāc ir 7 punkti")
+    nospiests(none)
 
 def nospiests(none):
     print("nospiests")
@@ -87,14 +130,15 @@ def nospiests(none):
     print(senesst)
     print(senes)
     print(xkoordinates)
-    print(ykoordinates)    
+    print(ykoordinates)   
+    print(uzvpunkti) 
 
 SakumaIzvelne()
 
 # punktu skaitīšana (kas notiek kad apēd sēni), sev iekša izsauc funkciju "rezultatutablo - katru reizi kad izpildās", iekšā funkcijā punkti
 # ir definēts "spēles rezultāts - kas notiek, kad spēlētājs salasa uzvaras punktus")
 def punkti():
-    global rezultats, senesst, senes, xkoordinates, ykoordinates
+    global rezultats, senesst, senes, xkoordinates, ykoordinates, uzvpunkti
     px = logs.coords(player)
     pxx = int(px[0])
     pxy = int(px[1])
@@ -106,8 +150,8 @@ def punkti():
             rezultats = rezultats +1
             senesst[i]= senesst[i] + 1
                     
-    if rezultats == 10 :
-        # šis notiek kad "tiek savākti 10 punkti" - parādās "Spēle uzvarēta", kuru nospiežot tiek izsaukta funkcija "nospiests" - principā spēle resetojas!!!
+    if rezultats == uzvpunkti :
+        # šis notiek kad "tiek savākti uzvaraspunkti punkti" - parādās "Spēle uzvarēta", kuru nospiežot tiek izsaukta funkcija "nospiests" - principā spēle resetojas!!!
         global uzvarteksts, uzvarteksts1
         uzvarteksts1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
         uzvarteksts = logs.create_text(450, 450,  font=(None, 50), text="Spēle uzvarēta!!!!")
