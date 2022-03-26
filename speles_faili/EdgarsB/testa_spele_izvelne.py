@@ -16,6 +16,8 @@ rezultats = 0
 
 uzvpunkti = 3
 
+reize = 0
+
 #Izveidojam spelēs laukumu!!! neaizmirstam komandu .pack()
 logs = Canvas(master, 
            width=canvas_width, 
@@ -57,18 +59,24 @@ def speletajs():
 
 #STARTA MENU - sākuma izvēlne (vēl nav uz loga nekas izveidots - tagad izveido "menu, kuru nospiežot tiek izsaukta funkcija (nākamā) nospiests")
 # 2.funkcija
-def SakumaIzvelne():
+@staticmethod
+def SakumaIzvelne(reize):
+    pass
     logs.delete("all")
     print("Starta menu")
     global menu1, menu, menu2, menu3
-    menu1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
-    menu = logs.create_text(450, 450,  font=(None, 50), text="SĀKT SPĒLI")
+    menu1 = logs.create_rectangle(150, 300, 750, 400, fill="white", outline="blue")
+    menu = logs.create_text(450, 350,  font=(None, 50), text="SĀKT SPĒLI")
     logs.tag_bind(menu1, "<Button-1>", nospiests)
     logs.tag_bind(menu, "<Button-1>", nospiests)
-    menu2 = logs.create_rectangle(150, 550, 750, 650, fill="white", outline="blue")
-    menu3 = logs.create_text(450, 600,  font=(None, 50), text="LĪMENIS")
+    menu2 = logs.create_rectangle(150, 450, 750, 550, fill="white", outline="blue")
+    menu3 = logs.create_text(450, 500,  font=(None, 50), text="LĪMENIS")
     logs.tag_bind(menu2, "<Button-1>", nospiests2)
     logs.tag_bind(menu3, "<Button-1>", nospiests2)
+    menu4 = logs.create_rectangle(150, 600, 750, 700, fill="white", outline="blue")
+    menu5 = logs.create_text(450, 650,  font=(None, 50), text="NOTEIKUMI")
+    #logs.tag_bind(menu2, "<Button-1>", nospiests3)
+    #logs.tag_bind(menu3, "<Button-1>", nospiests3)
 
 # funkcija nospiests (pa lielam uzāk spēli - pirmā lieta - nodzēš "izvēlnes pogas" (arī "uzvarastekstu)") un uzliek fona attēlu,
 # iztīra sēņu masīvus un uzģenēr jaunus, tad izsauc 1.funkciju "spēlētājs" )
@@ -87,8 +95,9 @@ def nospiests2(none):
     logs.tag_bind(p1t, "<Button-1>", viegls)
     p2 = logs.create_rectangle(150, 320, 750, 420, fill="white", outline="blue")
     p2t = logs.create_text(450, 370,  font=(None, 30), text="VIDĒJS")
-    logs.tag_bind(p2, "<Button-1>", videjs)
-    logs.tag_bind(p2t, "<Button-1>", videjs)
+    logs.tag_bind(p2, "<Button-1>", SakumaIzvelne, add=0)
+    logs.tag_bind(p2t, "<Button-1>", SakumaIzvelne, add=0)
+    #POGA UZ SĀKUMA IZVELNI???!!!
 
 def viegls(none):
     global uzvpunkti
@@ -126,7 +135,7 @@ def nospiests(none):
     print(ykoordinates)   
     print(uzvpunkti) 
 
-SakumaIzvelne()
+SakumaIzvelne(1)
 
 # punktu skaitīšana (kas notiek kad apēd sēni), sev iekša izsauc funkciju "rezultatutablo - katru reizi kad izpildās", iekšā funkcijā punkti
 # ir definēts "spēles rezultāts - kas notiek, kad spēlētājs salasa uzvaras punktus")
@@ -143,7 +152,7 @@ def punkti():
             rezultats = rezultats +1
             senesst[i]= senesst[i] + 1
                     
-    if rezultats == uzvpunkti :
+    if rezultats == uzvpunkti or rezultats > uzvpunkti :
         # šis notiek kad "tiek savākti uzvaraspunkti punkti" - parādās "Spēle uzvarēta", kuru nospiežot tiek izsaukta funkcija "nospiests" - principā spēle resetojas!!!
         global uzvarteksts, uzvarteksts1
         uzvarteksts1 = logs.create_rectangle(150, 400, 750, 500, fill="white", outline="blue")
