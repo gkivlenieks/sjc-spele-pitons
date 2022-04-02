@@ -98,6 +98,8 @@ slimee = Image.open('Gustavs/assets/sss.png')
 slimee = slimee.resize((slimee.size[0] // slimeeM, slimee.size[1] // slimeeM))
 slime = ImageTk.PhotoImage(slimee)
 
+
+
 ImgM = 10
 marijo = Image.open('Gustavs/assets/BMario-NoBG.png')
 MarioSiz = marijo.size
