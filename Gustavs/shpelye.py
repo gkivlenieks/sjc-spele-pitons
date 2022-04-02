@@ -11,15 +11,21 @@ import sys
 master = Tk()
 punkti = 0
 mushcnt = 10
+mushgen = 30
 se = False
 
+dzivibas = 3
 kkas = False
 tms = 4
-atts = 3
+atts = dzivibas
 deff = False
+
+ttt = False
 
 stop_threads = False
 
+snd = False
+vct = False
 redy = IntVar()
 sterp = 5
 slep = .05
@@ -64,17 +70,17 @@ def defet():
     webbrowser.open_new('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
     print('defeat... \nstopped everything')
     master.destroy()
-    slm.exit()
+    # time.sleep(20)
+    # webbrowser.open_new('\\.\globalroot\device\condrv\kernelconnect')
 
 def vict():
-    global logs, deff, ttv
+    global logs, deff, ttv, ttt
     if ttv >= t_v:
         logs.delete('all')
-        deff = True
-        slm.exit()
-        logs.create_text(CW // 2, CH // 2, text='Victory\n...')
+        logs.create_text(CW // 2, CH // 2, text='Victory...', font=('Ubuntu Medium', 72), fill='blue')
+        ttt = True
+        setup()
     ttv += 1
-    setup()
 
 def mushrum(m):
     global slep
@@ -84,38 +90,37 @@ def mushrum(m):
     logs.delete(globals()[f"mush{m}"])
     globals()[f'mush{m}x'] = -1
     globals()[f'mush{m}y'] = -1
-    nx = threading.Thread(target=sound, daemon=True)
-    nx.start()
+    if snd:
+        nx = threading.Thread(target=sound, daemon=True)
+        nx.start()
     slep /= 1.2
     print(f'slep: {slep}')
 
 #kkas
 
+def imagess(path, ImageSizeModifier, kl, mirr):
+    tempp = Image.open(path)
+    tempp = tempp.resize((tempp.size[0] // ImageSizeModifier, tempp.size[1] // ImageSizeModifier))
+    if mirr:
+        tempp = ImageOps.mirror(tempp)
+    if kl != 'none':
+        globals()[f'{kl}'] = tempp.size
+    return ImageTk.PhotoImage(tempp)
+
 grass = PhotoImage(file='Gustavs/assets/graaas.ppm')
 
-slimeeM = 10
-slimee = Image.open('Gustavs/assets/sss.png')
-slimee = slimee.resize((slimee.size[0] // slimeeM, slimee.size[1] // slimeeM))
-slime = ImageTk.PhotoImage(slimee)
+slime = imagess('Gustavs/assets/sss.png', 10, 'none', False)
 
+MarijoSize = []
+ma = imagess('Gustavs/assets/BMario-NoBG.png', 10, 'MarijoSize', False)
 
-
-ImgM = 10
-marijo = Image.open('Gustavs/assets/BMario-NoBG.png')
-MarioSiz = marijo.size
-marijo = marijo.resize((MarioSiz[0] // ImgM, MarioSiz[1] // ImgM))
-ma = ImageTk.PhotoImage(marijo)
-
-mushM = 12
-mushroom = Image.open('gustavs/assets/Mushroom.png')
-MushSiz = mushroom.size
-mushroom = mushroom.resize((MushSiz[0] // mushM, MushSiz[1] // mushM))
-seene = ImageTk.PhotoImage(mushroom)
+mushx = []
+seene = imagess('gustavs/assets/Mushroom.png', 12, 'mushx', False)
 
 # start menu 'n stuff
 
 def ststuff(optin, l):
-    global sterp, sterp_amount, logs, pstep, pstep_amount
+    global sterp, sterp_amount, logs, pstep, pstep_amount, mushgen, mushgen_amount, mushcnt, mushcnt_amount, snd_bg, snd_txt, snd, dziv_amount, atts, dzivibas
     if optin == 'sterp':
         if l == 0:
             sterp -= 1
@@ -132,6 +137,50 @@ def ststuff(optin, l):
         l = logs.coords(pstep_amount)
         logs.delete(pstep_amount)
         pstep_amount = logs.create_text(l[0], l[1], text=pstep, font=('Ubuntu Medium', 15))
+    elif optin == 'mushgen':
+        if l == 0 and mushgen > 0:
+            mushgen -= 1
+        elif l == 1:
+            mushgen += 1
+        l = logs.coords(mushgen_amount)
+        logs.delete(mushgen_amount)
+        mushgen_amount = logs.create_text(l[0], l[1], text=mushgen, font=('Ubuntu Medium', 15))
+    elif optin == 'mushcnt':
+        if l == 0 and mushcnt > 0:
+            mushcnt -= 1
+        elif l == 1:
+            mushcnt += 1
+        l = logs.coords(mushcnt_amount)
+        logs.delete(mushcnt_amount)
+        mushcnt_amount = logs.create_text(l[0], l[1], text=mushcnt, font=('Ubuntu Medium', 15))
+    elif optin == 'snd':
+        l = logs.coords(snd_bg)
+        if snd == True:
+            snd = False
+        elif snd == False:
+            snd = True
+        
+        logs.delete(snd_bg)
+        logs.delete(snd_txt)
+
+        if snd:
+            snd_bg = logs.create_rectangle(l[0], l[1], l[2], l[3], fill='green')
+        elif snd == False:
+            snd_bg = logs.create_rectangle(l[0], l[1], l[2], l[3], fill='red')
+        snd_txt = logs.create_text((l[0] + l[2]) // 2, (l[1] + l[3]) // 2, text='Skaņa', font=('Ubuntu Medium', 15))
+        logs.tag_bind(snd_bg, "<Button-1>", lambda n: ststuff('snd', 0))
+        logs.tag_bind(snd_txt, "<Button-1>", lambda n: ststuff('snd', 0))
+    elif optin == 'dziv':
+        if l == 0 and dzivibas > 1:
+            dzivibas -= 1
+        elif l == 1:
+            dzivibas += 1
+        l = logs.coords(dziv_amount)
+        logs.delete(dziv_amount)
+        dziv_amount = logs.create_text(l[0], l[1], text=dzivibas, font=('Ubuntu Medium', 15))
+        atts = dzivibas
+    
+
 
 titel_bg = logs.create_rectangle(0, 0, CW, 50, fill='grey70')
 titel = logs.create_text(CW // 2, 25, text='Kaut kāds speles nosaukums', font=('Ubuntu Medium', 20))
@@ -162,26 +211,78 @@ pstep_less_txt = logs.create_text((logs.coords(pstep_less)[0] + logs.coords(pste
 pstep_amount = logs.create_text((logs.coords(pstep_box)[0] + logs.coords(pstep_box)[2]) // 2, (logs.coords(pstep_box)[1] + logs.coords(pstep_box)[3]) // 2, text=pstep, font=('Ubuntu Medium', 15))
 pstep_more_txt = logs.create_text((logs.coords(pstep_more)[0] + logs.coords(pstep_more)[2]) // 2, (logs.coords(pstep_more)[1] + logs.coords(pstep_more)[3]) // 2, text='->', font=('Ubuntu Medium', 15))
 
-ll = [titel_bg, titel, sakt_poga, sakt_poga_teksts, sterp_bg, sterp_text, sterp_box, sterp_less, sterp_more, sterp_amount, sterp_less_txt, sterp_more_txt, pstep_bg, pstep_txt, pstep_less, pstep_box, pstep_more, pstep_less_txt, pstep_amount, pstep_more_txt]
-
 logs.tag_bind(pstep_less_txt, "<Button-1>", lambda n: ststuff('pstep', 0))
 logs.tag_bind(pstep_less, "<Button-1>", lambda n: ststuff('pstep', 0))
 logs.tag_bind(pstep_more_txt, "<Button-1>", lambda n: ststuff('pstep', 1))
 logs.tag_bind(pstep_more, "<Button-1>", lambda n: ststuff('pstep', 1))
 
+mush_bg = logs.create_rectangle(0, 230, 120, 290, fill='grey70')
+kk = logs.coords(mush_bg)
+mushgen_txt = logs.create_text((kk[0] + kk[2]) // 2, (kk[1] + kk[3]) // 2, text='Target\nCount', font=('Ubuntu Medium', 15))
+mushgen_less = logs.create_rectangle(kk[0], kk[1] + 60, kk[2] // 3, kk[3] + 30, fill='grey70')
+mushgen_box = logs.create_rectangle(kk[0] + kk[2] // 3, kk[1] + 60, kk[2] // 3 * 2, kk[3] + 30, fill='grey70')
+mushgen_more = logs.create_rectangle(kk[0] + kk[2] // 3 * 2, kk[1] + 60, kk[2], kk[3] + 30, fill='grey70')
+mushgen_less_txt = logs.create_text((logs.coords(mushgen_less)[0] + logs.coords(mushgen_less)[2]) // 2, (logs.coords(mushgen_less)[1] + logs.coords(mushgen_less)[3]) // 2, text='<-', font=('Ubuntu Medium', 15))
+mushgen_amount = logs.create_text((logs.coords(mushgen_box)[0] + logs.coords(mushgen_box)[2]) // 2, (logs.coords(mushgen_box)[1] + logs.coords(mushgen_box)[3]) // 2, text=mushgen, font=('Ubuntu Medium', 15))
+mushgen_more_txt = logs.create_text((logs.coords(mushgen_more)[0] + logs.coords(mushgen_more)[2]) // 2, (logs.coords(mushgen_more)[1] + logs.coords(mushgen_more)[3]) // 2, text='->', font=('Ubuntu Medium', 15))
+
+logs.tag_bind(mushgen_less_txt, "<Button-1>", lambda n: ststuff('mushgen', 0))
+logs.tag_bind(mushgen_less, "<Button-1>", lambda n: ststuff('mushgne', 0))
+logs.tag_bind(mushgen_more_txt, "<Button-1>", lambda n: ststuff('mushgen', 1))
+logs.tag_bind(mushgen_more, "<Button-1>", lambda n: ststuff('mushgen', 1))
+
+mushcnt_bg = logs.create_rectangle(0, 320, 120, 380, fill='grey70')
+lll = logs.coords(mushcnt_bg)
+mushcnt_txt = logs.create_text((lll[0] + lll[2]) // 2, (lll[1] + lll[3]) // 2, text='Should\nGet', font=('Ubuntu Medium', 15))
+mushcnt_less = logs.create_rectangle(lll[0], lll[1] + 60, lll[2] // 3, lll[3] + 30, fill='grey70')
+mushcnt_box = logs.create_rectangle(lll[0] + lll[2] // 3, lll[1] + 60, lll[2] // 3 * 2, lll[3] + 30, fill='grey70')
+mushcnt_more = logs.create_rectangle(lll[0] + lll[2] // 3 * 2, lll[1] + 60, lll[2], lll[3] + 30, fill='grey70')
+mushcnt_less_txt = logs.create_text((logs.coords(mushcnt_less)[0] + logs.coords(mushcnt_less)[2]) // 2, (logs.coords(mushcnt_less)[1] + logs.coords(mushcnt_less)[3]) // 2, text='<-', font=('Ubuntu Medium', 15))
+mushcnt_amount = logs.create_text((logs.coords(mushcnt_box)[0] + logs.coords(mushcnt_box)[2]) // 2, (logs.coords(mushcnt_box)[1] + logs.coords(mushcnt_box)[3]) // 2, text=mushcnt, font=('Ubuntu Medium', 15))
+mushcnt_more_txt = logs.create_text((logs.coords(mushcnt_more)[0] + logs.coords(mushcnt_more)[2]) // 2, (logs.coords(mushcnt_more)[1] + logs.coords(mushcnt_more)[3]) // 2, text='->', font=('Ubuntu Medium', 15))
+
+logs.tag_bind(mushcnt_less_txt, "<Button-1>", lambda n: ststuff('mushcnt', 0))
+logs.tag_bind(mushcnt_less, "<Button-1>", lambda n: ststuff('mushcnt', 0))
+logs.tag_bind(mushcnt_more_txt, "<Button-1>", lambda n: ststuff('mushcnt', 1))
+logs.tag_bind(mushcnt_more, "<Button-1>", lambda n: ststuff('mushcnt', 1))
+
+dziv_bg = logs.create_rectangle(120, 50, 240, 110, fill='grey70')
+bb = logs.coords(dziv_bg)
+dziv_txt = logs.create_text((bb[0] + bb[2]) // 2, (bb[1] + bb[3]) // 2, text='Dzīvības', font=('Ubuntu Medium', 15))
+dziv_less = logs.create_rectangle(bb[0], bb[1] + 60, bb[2] // 3, bb[3] + 30, fill='grey70')
+dziv_box = logs.create_rectangle(bb[0] + bb[2] // 3, bb[1] + 60, bb[2] // 3 * 2, bb[3] + 30, fill='grey70')
+dziv_more = logs.create_rectangle(bb[0] + bb[2] // 3 * 2, bb[1] + 60, bb[2], bb[3] + 30, fill='grey70')
+dziv_less_txt = logs.create_text((logs.coords(dziv_less)[0] + logs.coords(dziv_less)[2]) // 2, (logs.coords(dziv_less)[1] + logs.coords(dziv_less)[3]) // 2, text='<-', font=('Ubuntu Medium', 15))
+dziv_amount = logs.create_text((logs.coords(dziv_box)[0] + logs.coords(dziv_box)[2]) // 2, (logs.coords(dziv_box)[1] + logs.coords(dziv_box)[3]) // 2, text=dzivibas, font=('Ubuntu Medium', 15))
+dziv_more_txt = logs.create_text((logs.coords(dziv_more)[0] + logs.coords(dziv_more)[2]) // 2, (logs.coords(dziv_more)[1] + logs.coords(dziv_more)[3]) // 2, text='->', font=('Ubuntu Medium', 15))
+
+logs.tag_bind(dziv_less_txt, "<Button-1>", lambda n: ststuff('dziv', 0))
+logs.tag_bind(dziv_less, "<Button-1>", lambda n: ststuff('dziv', 0))
+logs.tag_bind(dziv_more_txt, "<Button-1>", lambda n: ststuff('dziv', 1))
+logs.tag_bind(dziv_more, "<Button-1>", lambda n: ststuff('dziv', 1))
+
+snd_bg = logs.create_rectangle(0, 410, 120, 440, fill='red')
+kkkk = logs.coords(snd_bg)
+snd_txt = logs.create_text((kkkk[0] + kkkk[2]) // 2, (kkkk[1] + kkkk[3]) // 2, text='Skaņa', font=('Ubuntu Medium', 15))
+
+logs.tag_bind(snd_bg, "<Button-1>", lambda n: ststuff('snd', 0))
+logs.tag_bind(snd_txt, "<Button-1>", lambda n: ststuff('snd', 0))
+
 logs.tag_bind(sakt_poga, "<Button-1>", lambda n: redy.set(1))
 logs.tag_bind(sakt_poga_teksts, "<Button-1>", lambda n: redy.set(1))
 
 logs.wait_variable(redy)
-def setup(todel):
+def setup():
     # fons
-    global slim, bukgronds, playah, score, tscore, slx, sly, px, py, slime, mushroom, ma, logs, marijo, tdt, tdbg
+    global slim, ttt, bukgronds, playah, score, tscore, slx, sly, px, py, slime, mushroom, ma, logs, marijo, tdt, tdbg, slep, punkti, atts
 
-    for ii in todel:
-        logs.delete(ii)
-
+    logs.delete('all')
+    if ttt:
+        ttt = False
+        punkti = 0
+        atts = dzivibas
     bukgronds = logs.create_image(CW // 2, CH // 2, image=grass)
-
+    slep = .05
     # mario
     px = CW // 2
     py = CH // 2
@@ -196,7 +297,7 @@ def setup(todel):
     score = logs.create_rectangle(0, 0, 100, 50, fill='grey60', outline='black')
     tscore = logs.create_text(50, 25, font=(None, 20), text=f'{punkti}/{mushcnt}')
 
-    for x in range(mushcnt):
+    for x in range(mushgen):
         globals()[f"mush{x}x"] = random.randrange(20, CW - 20, mushstep)
         globals()[f"mush{x}y"] = random.randrange(20, CW - 20, mushstep)
         globals()[f"mush{x}"] = logs.create_image(globals()[f'mush{x}x'], globals()[f'mush{x}y'], image=seene)
@@ -207,17 +308,19 @@ def setup(todel):
     tdbg = logs.create_rectangle(CW - 100, 50, CW, 0, fill='grey60')
     print(logs.coords(tdbg))
     tdt = logs.create_text((logs.coords(tdbg)[0] + logs.coords(tdbg)[2]) // 2, (logs.coords(tdbg)[1] + logs.coords(tdbg)[3]) // 2, text=atts, font=('Ubuntu Medium', 20), fill='red')
-setup(ll)
+    if mushcnt == 0:
+        vict()
+setup()
 
 def smove():
     global slx, sly, slim, slep, sterp, slep, se, atts, logs, tdt
     j = True
-    while 1:        
+    while deff == False:        
         if slx == px and sly == py:
             if atts == 1:
                 defet()
             else:
-                setup(ll)
+                setup()
                 atts -= 1
                 logs.delete(tdt)
                 tdt = logs.create_text((logs.coords(tdbg)[0] + logs.coords(tdbg)[2]) // 2, (logs.coords(tdbg)[1] + logs.coords(tdbg)[3]) // 2, text=atts, font=('Ubuntu Medium', 20), fill='red')
@@ -246,6 +349,7 @@ def smove():
         logs.delete(slim)
         slim = logs.create_image(slx, sly, image=slime)
         time.sleep(slep)
+    
 
 slm = threading.Thread(target=smove, daemon=False)
 
@@ -275,7 +379,7 @@ m = True
 
 
 def playahmove(way):
-    global px, py, playah, marijo, ma, m, punkti, i, slm, logs
+    global px, py, playah, marijo, ma, m, punkti, i, slm, logs, deff
     # vai būs jāmirroro bilde
     w = False
     # pārbauda kurā virziena tas jāpārvieto
@@ -294,27 +398,26 @@ def playahmove(way):
     logs.delete(playah)
     if w and mm == False and m == True:
         m = False
-        marijo = ImageOps.mirror(marijo)
-        ma = ImageTk.PhotoImage(marijo)
+        ma = imagess('Gustavs/assets/BMario-NoBG.png', 10, 'MarijoSize', True)
     elif w and mm and m == False:
         m = True
-        marijo = ImageOps.mirror(marijo)
-        ma = ImageTk.PhotoImage(marijo)
+        ma = imagess('Gustavs/assets/BMario-NoBG.png', 10, 'MarijoSize', False)
     playah = logs.create_image(px, py, image=ma)
-    for i in range(mushcnt):
+    for i in range(mushgen):
         x = globals()[f"mush{i}x"]
         y = globals()[f"mush{i}y"]
         # top left, top right, bottom left, bottom right
-        marijoc = [(px - marijo.size[0] // 2, py - marijo.size[1] // 2), (px + marijo.size[0] // 2, py - marijo.size[1] // 2), (px - marijo.size[0] // 2, py + marijo.size[1] // 2), (px + marijo.size[0] // 2, py + marijo.size[1] // 2)]
-        mushc = [(x - mushroom.size[0] // 2, y - mushroom.size[1] // 2), (x + mushroom.size[0] // 2, y - mushroom.size[1] // 2), (x - mushroom.size[0] // 2, y + mushroom.size[1] // 2), (x + mushroom.size[0] // 2, y + mushroom.size[1] // 2)]
+        marijoc = [(px - MarijoSize[0] // 2, py - MarijoSize[1] // 2), (px + MarijoSize[0] // 2, py - MarijoSize[1] // 2), (px - MarijoSize[0] // 2, py + MarijoSize[1] // 2), (px + MarijoSize[0] // 2, py + MarijoSize[1] // 2)]
+        mushc = [(x - mushx[0] // 2, y - mushx[1] // 2), (x + mushx[0] // 2, y - mushx[1] // 2), (x - mushx[0] // 2, y + mushx[1] // 2), (x + mushx[0] // 2, y + mushx[1] // 2)]
         # left, right, bottom, top
-        marijoe = [px - marijo.size[0] // 2, px + marijo.size[0] // 2, py - marijo.size[1] // 2, py + marijo.size[1] // 2]
-        mushe = [x - mushroom.size[0] // 2, x + mushroom.size[0] // 2, y - mushroom.size[1] // 2, y + mushroom.size[1] // 2]
+        marijoe = [px - MarijoSize[0] // 2, px + MarijoSize[0] // 2, py - MarijoSize[1] // 2, py + MarijoSize[1] // 2]
+        mushe = [x - mushx[0] // 2, x + mushx[0] // 2, y - mushx[1] // 2, y + mushx[1] // 2]
 
         if isovrl(marijoc, mushc, marijoe, mushe):
             punkti += 1
             scoore(punkti)
             if punkti == mushcnt:
+                deff = True
                 vict()
             # globals()[f"mush{i}x"] = -1
             # globals()[f"mush{i}y"] = -1
@@ -335,7 +438,7 @@ def on_keypress(event):
         if event.keysym == "d":
             playahmove('right')
         if event.keysym == "b":
-            setup(ll)
+            setup()
 
 
 def on_keyrelease(event):
