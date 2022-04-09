@@ -77,9 +77,8 @@ def vict():
     global logs, deff, ttv, ttt
     if ttv >= t_v:
         logs.delete('all')
-        logs.create_text(CW // 2, CH // 2, text='Victory...', font=('Ubuntu Medium', 72), fill='blue')
-        ttt = True
-        setup()
+        logs.create_text(CW // 2, CH // 2, text='Victory...\nNav nekas\nvairāk...', font=('Ubuntu Medium', 72), fill='blue')
+        deff = True
     ttv += 1
 
 def mushrum(m):
@@ -249,9 +248,9 @@ logs.tag_bind(mushcnt_more, "<Button-1>", lambda n: ststuff('mushcnt', 1))
 dziv_bg = logs.create_rectangle(120, 50, 240, 110, fill='grey70')
 bb = logs.coords(dziv_bg)
 dziv_txt = logs.create_text((bb[0] + bb[2]) // 2, (bb[1] + bb[3]) // 2, text='Dzīvības', font=('Ubuntu Medium', 15))
-dziv_less = logs.create_rectangle(bb[0], bb[1] + 60, bb[2] // 3, bb[3] + 30, fill='grey70')
+dziv_less = logs.create_rectangle(bb[0], bb[1] + 60, bb[0] + (bb[2] - bb[0]) // 3, bb[3] + 30, fill='grey70')
 dziv_box = logs.create_rectangle(bb[0] + bb[2] // 3, bb[1] + 60, bb[2] // 3 * 2, bb[3] + 30, fill='grey70')
-dziv_more = logs.create_rectangle(bb[0] + bb[2] // 3 * 2, bb[1] + 60, bb[2], bb[3] + 30, fill='grey70')
+dziv_more = logs.create_rectangle(bb[0] + (bb[2] - bb[0]) // 3 * 2, bb[1] + 60, bb[2], bb[3] + 30, fill='grey70')
 dziv_less_txt = logs.create_text((logs.coords(dziv_less)[0] + logs.coords(dziv_less)[2]) // 2, (logs.coords(dziv_less)[1] + logs.coords(dziv_less)[3]) // 2, text='<-', font=('Ubuntu Medium', 15))
 dziv_amount = logs.create_text((logs.coords(dziv_box)[0] + logs.coords(dziv_box)[2]) // 2, (logs.coords(dziv_box)[1] + logs.coords(dziv_box)[3]) // 2, text=dzivibas, font=('Ubuntu Medium', 15))
 dziv_more_txt = logs.create_text((logs.coords(dziv_more)[0] + logs.coords(dziv_more)[2]) // 2, (logs.coords(dziv_more)[1] + logs.coords(dziv_more)[3]) // 2, text='->', font=('Ubuntu Medium', 15))
