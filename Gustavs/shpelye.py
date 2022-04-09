@@ -14,7 +14,7 @@ mushcnt = 10
 mushgen = 30
 se = False
 
-dzivibas = 3
+dzivibas = 1000000000000000
 kkas = False
 tms = 4
 atts = dzivibas
@@ -48,7 +48,9 @@ logs = Canvas(
 )
 logs.pack()
 
-
+# loga title
+master.title("Shpelye")
+# master.iconphoto(PhotoImage(file="/assets/ssss.ico"))
 
 # overlap
 def isovrl(rc1, rc2, re1, re2):
@@ -132,7 +134,7 @@ def smove():
     j = True
     while deff == False:        
         if slx == px and sly == py:
-            if atts == 1:
+            if atts <= 1:
                 defet()
             else:
                 setup()
@@ -360,8 +362,7 @@ def scoore(points):
     logs.delete(tscore)
     tscore = logs.create_text(50, 25, font=(None, 20), text=f'{punkti}/{mushcnt}')
 
-# loga title
-master.title("Shpelye")
+
 
 # resizability
 master.resizable(False, False)
@@ -424,6 +425,7 @@ def playahmove(way):
 
 
 def on_keypress(event):
+    global deff
     if deff == False:
         vict()
         if event.keysym == "w":
@@ -436,6 +438,8 @@ def on_keypress(event):
             playahmove('right')
         if event.keysym == "b":
             setup()
+        if event.keysym == "q":
+            deff = True
 
 
 def on_keyrelease(event):
